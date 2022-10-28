@@ -3,12 +3,18 @@ import { useState, useEffect } from "react";
 
 function Home() {
   const [movies, setMovies] = useState([]);
+  const image_path = "https://image.tmdb.org/t/p/w500";
 
   useEffect(() => {
-    const APIkey = `minhachaveaqui`;
-    fetch(`https://api.themoviedb.org/3/movie/550?api_key=${APIkey}`)
+    const APIkey = `minha chave aqui`;
+    fetch(
+      `https://api.themoviedb.org/3/movie/popular?api_key=${APIkey}&language=en-US&page=1`
+    )
       .then((response) => response.json())
-      .then((data) => console.log(data.results));
+      .then((data) => {
+        console.log(data.results);
+        setMovies(data.results);
+      });
   }, []);
 
   return (
@@ -19,7 +25,10 @@ function Home() {
           return (
             <Movie key={movie.id}>
               <a href="https://google.com.br">
-                <img src={movie.image_url} alt={movie.title} />
+                <img
+                  src={`${image_path}${movie.poster_path}`}
+                  alt={movie.title}
+                />
               </a>
               <span>{movie.title}</span>
             </Movie>
