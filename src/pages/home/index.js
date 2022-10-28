@@ -1,26 +1,15 @@
 import { Container, MovieList, Movie } from "./styles";
+import { useState, useEffect } from "react";
 
 function Home() {
-  const movies = [
-    {
-      id: 1,
-      title: "Spider Man",
-      image_url:
-        "https://upload.wikimedia.org/wikipedia/pt/thumb/0/00/Spider-Man_No_Way_Home_poster.jpg/250px-Spider-Man_No_Way_Home_poster.jpg",
-    },
-    {
-      id: 2,
-      title: "Batman",
-      image_url:
-        "https://upload.wikimedia.org/wikipedia/pt/thumb/0/00/Spider-Man_No_Way_Home_poster.jpg/250px-Spider-Man_No_Way_Home_poster.jpg",
-    },
-    {
-      id: 3,
-      title: "Avengers",
-      image_url:
-        "https://upload.wikimedia.org/wikipedia/pt/thumb/0/00/Spider-Man_No_Way_Home_poster.jpg/250px-Spider-Man_No_Way_Home_poster.jpg",
-    },
-  ];
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const APIkey = `minhachaveaqui`;
+    fetch(`https://api.themoviedb.org/3/movie/550?api_key=${APIkey}`)
+      .then((response) => response.json())
+      .then((data) => console.log(data.results));
+  }, []);
 
   return (
     <Container>
